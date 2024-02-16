@@ -2,7 +2,7 @@ package com.example;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println(binaryToDecimal("11111"));
+        System.out.println(decimalToBinary("123"));
     }
 
     private static int binaryToDecimal(String binary) {
@@ -17,5 +17,23 @@ public class Main {
         }
 
         return decimal;
+    }
+
+    private static String decimalToBinary(String decimal) {
+        int decimalNumber = Integer.parseInt(decimal);
+        int coef = (int) (Math.log(decimalNumber) / Math.log(2));
+
+        StringBuilder builder = new StringBuilder();
+        while (coef >= 0) {
+            if (decimalNumber - Math.pow(2, coef) >= 0) {
+                decimalNumber -= Math.pow(2, coef);
+                builder.append(1);
+            } else {
+                builder.append(0);
+            }
+            coef--;
+        }
+
+        return builder.toString();
     }
 }
